@@ -119,7 +119,7 @@ public class CommandsDB extends GeneralData {
         return check;
     }
     
-    /// inserir audio (((certo)))
+    /// inserir audio
     public static void uploadAudio(Connection conn, String audioname) throws IOException {
         FileInputStream stream = null;
         try {
@@ -127,7 +127,6 @@ public class CommandsDB extends GeneralData {
             int res = fc.showOpenDialog(null);
             if (res == JFileChooser.APPROVE_OPTION) {
                 File arq = fc.getSelectedFile();
-                //String audioname = arq.getName();
                 stream = new FileInputStream(arq);
                 String sqlInsert = "INSERT INTO audio_files (audioname, audiofile) VALUES (?,?)";
                 PreparedStatement stmt = conn.prepareStatement(sqlInsert);
@@ -148,7 +147,6 @@ public class CommandsDB extends GeneralData {
             String sqlSelect = "SELECT audiofile FROM audio_files WHERE audioname = ?";
             PreparedStatement stmt = conn.prepareStatement(sqlSelect);
             stmt.setString(1, audioname);
-
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 byte[] audioBytes = rs.getBytes("audiofile");
@@ -251,11 +249,9 @@ public class CommandsDB extends GeneralData {
             String sqlSelect = "SELECT textfile FROM text_files WHERE textname = ?";
             PreparedStatement stmt = conn.prepareStatement(sqlSelect);
             stmt.setString(1, getTextname());
-
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String conteudo = rs.getString("textfile");
-
                 String ntemp = "openfile.txt";
                 File temp = new File(ntemp);
                 FileWriter writer = new FileWriter(temp);
@@ -270,5 +266,7 @@ public class CommandsDB extends GeneralData {
             e.printStackTrace();
         }
     }
+    
+    
     
 }
