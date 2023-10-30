@@ -194,7 +194,7 @@ public class TestLogin extends javax.swing.JFrame {
         
     private void INSERT(){
         conn = bd.getConn();
-        System.out.println(">> Cadastro");
+        System.out.println(">> Cadastro usuario");
         ///
         uName = JOptionPane.showInputDialog(null, "Usuario: ");
         cBD.setUsername(uName);
@@ -228,7 +228,7 @@ public class TestLogin extends javax.swing.JFrame {
     
     private void DELETE(){
         conn = bd.getConn();
-        System.out.println(">> Exclusao");
+        System.out.println(">> Delete usuario");
         uEmail = JOptionPane.showInputDialog(null, "Email: ");
         cBD.setEmail(uEmail);
         cBD.deleteUser(conn);
@@ -237,7 +237,7 @@ public class TestLogin extends javax.swing.JFrame {
     
     private void LOGIN(){
         conn = bd.getConn();
-        System.out.println(">> Acesso");
+        System.out.println(">> Acesso usuario");
         uEmail = JOptionPane.showInputDialog(null, "Email: ");
         cBD.setEmail(uEmail);
         uPass = JOptionPane.showInputDialog(null, "Senha: ");

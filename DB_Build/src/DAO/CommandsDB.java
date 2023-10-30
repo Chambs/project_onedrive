@@ -5,6 +5,8 @@
 package DAO;
 
 import DTO.*;
+import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JFileChooser;
@@ -22,6 +26,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
+import javax.swing.JFrame;
 
 public class CommandsDB extends GeneralData {
     
@@ -70,7 +75,6 @@ public class CommandsDB extends GeneralData {
         }
     }
     
-    
     /// validar email
     public static String emailVerify(Connection conn, String uEmail) {
         PreparedStatement stmt = null;
@@ -92,7 +96,6 @@ public class CommandsDB extends GeneralData {
         }
         return check;
     }
-    
     
     /// validar senha
     public static String passVerify(Connection conn, String uEmail){
@@ -116,7 +119,6 @@ public class CommandsDB extends GeneralData {
         return check;
     }
     
-    
     /// inserir audio (((certo)))
     public static void uploadAudio(Connection conn, String audioname) throws IOException {
         FileInputStream stream = null;
@@ -132,7 +134,6 @@ public class CommandsDB extends GeneralData {
                 stmt.setString(1, audioname);
                 stmt.setBinaryStream(2, stream, (int) arq.length());
                 stmt.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Arquivo de audio inserido com sucesso");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,12 +142,11 @@ public class CommandsDB extends GeneralData {
         } 
     }
     
-    
     /// tocar audio
     public static void playAudio(Connection conn, String audioname) {
         try {
-            String selectSQL = "SELECT audiofile FROM audio_files WHERE audioname = ?";
-            PreparedStatement stmt = conn.prepareStatement(selectSQL);
+            String sqlSelect = "SELECT audiofile FROM audio_files WHERE audioname = ?";
+            PreparedStatement stmt = conn.prepareStatement(sqlSelect);
             stmt.setString(1, audioname);
 
             ResultSet rs = stmt.executeQuery();
@@ -169,13 +169,12 @@ public class CommandsDB extends GeneralData {
                 Thread.sleep(clip.getMicrosecondLength()/1000);
                 clip.close();
             } else {
-                System.out.println("Audio nao encontrado!");
+                JOptionPane.showMessageDialog(null, "Audio nao encontrado!");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
     
     /// excluir audio
     public void deleteAudio(Connection conn){
@@ -197,4 +196,79 @@ public class CommandsDB extends GeneralData {
             }
         }
     }
+    
+    /// inserir texto
+    public void uploadTxt(Connection connection) {
+        JFileChooser fc = new JFileChooser();
+        int returnValue = fc.showOpenDialog(new JFrame());
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                String path = fc.getSelectedFile().getAbsolutePath();
+                BufferedReader reader = new BufferedReader(new FileReader(path));
+                StringBuilder conteudo = new StringBuilder();
+                String linha;
+                while ((linha = reader.readLine()) != null) {
+                    conteudo.append(linha).append("\n");
+                }
+                String sqlInsert = "INSERT INTO text_files (textname, textfile) VALUES (?, ?)";
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
+                preparedStatement.setString(1, getTextname());
+                preparedStatement.setString(2, conteudo.toString());
+                preparedStatement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Arquivo de texto inserido com sucesso!");
+            } catch (Exception e) {
+                System.out.println("Erro ao adicionar dados " + e.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    /// excluir texto
+    public void deleteTxt(Connection conn){
+        String sqlDelete = "DELETE FROM text_files WHERE textname = ?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(sqlDelete);
+            stmt.setString(1, getTextname());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                conn.setAutoCommit(false);
+                conn.rollback();
+            } catch (SQLException e1) {
+                System.out.println("Erro ao excluir os dados " + e1.toString());
+                throw new RuntimeException(e1);
+            }
+        }
+    }
+    
+    /// carregar texto
+    public void loadTxt(Connection conn) {
+        try {
+            String sqlSelect = "SELECT textfile FROM text_files WHERE textname = ?";
+            PreparedStatement stmt = conn.prepareStatement(sqlSelect);
+            stmt.setString(1, getTextname());
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String conteudo = rs.getString("textfile");
+
+                String ntemp = "openfile.txt";
+                File temp = new File(ntemp);
+                FileWriter writer = new FileWriter(temp);
+                writer.write(conteudo);
+                writer.close();
+
+                Desktop.getDesktop().open(temp);
+            } else {
+                JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

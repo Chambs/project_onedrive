@@ -41,9 +41,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jToggleButton2" min="-2" pref="84" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jToggleButton3" min="-2" pref="95" max="-2" attributes="0"/>
+              <Component id="jToggleButton3" min="-2" pref="83" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jToggleButton4" min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="jToggleButton4" min="-2" pref="84" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jToggleButton1" min="-2" pref="84" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -54,7 +54,7 @@
   <SubComponents>
     <Component class="javax.swing.JToggleButton" name="jToggleButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="FECHAR"/>
+        <Property name="text" type="java.lang.String" value="SAIR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
@@ -78,7 +78,7 @@
     </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButton4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="DELETE"/>
+        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>

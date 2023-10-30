@@ -17,6 +17,9 @@ public class GeneralData {
     private String audioname;
     private Blob audiofile;
     
+    private String textname;
+
+    
     public GeneralData(){
     }
     
@@ -29,6 +32,10 @@ public class GeneralData {
     public GeneralData(String audioname, Blob audiofile){
         this.audioname = audioname;
         this.audiofile = audiofile;
+    }
+    
+    public GeneralData(String textname){
+        this.textname = textname;
     }
     
    
@@ -67,10 +74,18 @@ public class GeneralData {
         this.audiofile = audiofile;
     }
     
+    public String getTextname() {
+        return textname;
+    }
+    public void setTextname(String textname) {
+        this.textname = textname;
+    }
     
     @Override
     public String toString() {
         return ">> Data: \nUser = " + getUsername() + " \nEmail = " + getEmail() + " \nSenha = " + getPassword();
     }
+
+    
     
 }

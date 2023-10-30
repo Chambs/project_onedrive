@@ -40,7 +40,7 @@ public class TestAudio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setText("FECHAR");
+        jToggleButton1.setText("SAIR");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -61,7 +61,7 @@ public class TestAudio extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton4.setText("DELETE");
+        jToggleButton4.setText("EXCLUIR");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -87,9 +87,9 @@ public class TestAudio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -168,16 +168,17 @@ public class TestAudio extends javax.swing.JFrame {
     
     public void UPLOAD() throws IOException{
         conn = bd.getConn();
-        System.out.println(">> Upload");
+        System.out.println(">> Upload audio)");
         aName = JOptionPane.showInputDialog(null, "Salvar arquivo como: ");
         cBD.setAudioname(aName);
-        cBD.uploadAudio(conn, aName);        
+        cBD.uploadAudio(conn, aName);
+        JOptionPane.showMessageDialog(null, "Arquivo de audio inserido com sucesso");
     }
     
     ////// POR ENQUANTO ELE SÓ ACEITA ARQUIVOS .WAV
     public void PLAYER(){
         conn = bd.getConn();
-        System.out.println(">> Play");
+        System.out.println(">> Play audio");
         aName = JOptionPane.showInputDialog(null, "Nome: ");
         cBD.setAudioname(aName);
         cBD.playAudio(conn, aName);
@@ -185,7 +186,7 @@ public class TestAudio extends javax.swing.JFrame {
     
     public void DELETE(){
         conn = bd.getConn();
-        System.out.println(">> Delete");
+        System.out.println(">> Delete audio");
         aName = JOptionPane.showInputDialog(null, "Nome do arquivo a ser deletado: ");
         cBD.setAudioname(aName);
         cBD.deleteAudio(conn);
