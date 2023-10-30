@@ -6,6 +6,7 @@ package TEST;
 
 import DAO.CommandsDB;
 import DTO.ConnFactory;
+import java.io.File;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -106,6 +107,18 @@ public class TestText extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.out.println(">> Programa encerrado");
+        
+        File arquivo = new File("openfile.txt");
+        if (arquivo.exists()) {
+            if (arquivo.delete()) {
+                System.out.println("O arquivo foi excluído com sucesso.");
+            } else {
+                System.out.println("Não foi possível excluir o arquivo.");
+            }
+        } else {
+            System.out.println("O arquivo não existe no caminho especificado.");
+        }
+        
         System.exit(0);
     }//GEN-LAST:event_jButton4ActionPerformed
 
