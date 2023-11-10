@@ -228,7 +228,7 @@ public class TestLogin extends javax.swing.JFrame {
     
     private void DELETE(){
         conn = bd.getConn();
-        System.out.println(">> Excluir usuario");
+        System.out.println(">> Delete usuario");
         uEmail = JOptionPane.showInputDialog(null, "Email: ");
         cBD.setEmail(uEmail);
         cBD.deleteUser(conn);

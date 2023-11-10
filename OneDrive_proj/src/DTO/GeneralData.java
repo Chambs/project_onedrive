@@ -1,6 +1,5 @@
 
 package DTO;
-import java.sql.Blob;
 
 public class GeneralData {
     private String username;
@@ -8,14 +7,11 @@ public class GeneralData {
     private String password;
     
     private String audioname;
-
-    private Blob audiofile;
-    
     private String textname;
-
     private String imagename;
-
     
+    private String autor;
+
     public GeneralData(){
     }
     
@@ -24,16 +20,6 @@ public class GeneralData {
         this.email = email;
         this.password = password;
     }
-    
-    public GeneralData(String audioname, Blob audiofile){
-        this.audioname = audioname;
-        this.audiofile = audiofile;
-    }
-    
-    public GeneralData(String textname){
-        this.textname = textname;
-    }
-    
    
     public String getUsername() {
         return username;
@@ -63,13 +49,6 @@ public class GeneralData {
         this.audioname = audioname;
     }
 
-    public Blob getAudiofile() {
-        return audiofile;
-    }
-    public void setAudiofile(Blob audiofile) {
-        this.audiofile = audiofile;
-    }
-    
     public String getTextname() {
         return textname;
     }
@@ -84,11 +63,15 @@ public class GeneralData {
         this.imagename = imagename;
     }
     
+    public String getAutor() {
+        return autor;
+    }
+    public void setAutor(String autor){
+        this.autor = autor;
+    }
+    
     @Override
     public String toString() {
         return ">> Data: \nUser = " + getUsername() + " \nEmail = " + getEmail() + " \nSenha = " + getPassword();
     }
-
-    
-    
 }

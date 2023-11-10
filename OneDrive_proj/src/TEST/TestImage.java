@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class TestImage {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String iName;
+        String iName, iAutor;
         int loop = 0;
 
         CommandsDB cBD = new CommandsDB();
@@ -25,6 +25,8 @@ public class TestImage {
             if(op.equals("1")){
                 System.out.println(">> Upload imagem");
                 conn = bd.getConn();
+                iAutor = JOptionPane.showInputDialog(null, "Autor: "); //// O AUTOR SERA AQUELE QUE TIVER FEITO LOGIN
+                cBD.setAutor(iAutor);
                 iName = JOptionPane.showInputDialog(null, "Salvar como: ");
                 cBD.setImagename(iName);
                 cBD.uploadImg(conn, iName);

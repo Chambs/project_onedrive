@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.io.File;
 import java.io.FileInputStream;
@@ -197,6 +198,28 @@ public class CommandsDB extends GeneralData {
         }
     }
     
+    /// table de texto
+    public ArrayList<GeneralData> listAud(){
+        Connection conn;
+        PreparedStatement ps;
+        ResultSet rs;
+        ArrayList<GeneralData> lista = new ArrayList<>();
+        String sqlSelect = "SELECT * FROM audio_files";
+        conn = new ConnFactory().getConn();
+        try {
+         ps = conn.prepareStatement(sqlSelect);
+         rs = ps.executeQuery();
+         while(rs.next()){
+             GeneralData gd = new GeneralData();
+             gd.setAudioname(rs.getString("audioname"));
+             gd.setAutor(rs.getString("audioautor"));
+             lista.add(gd);
+         }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return lista;
+    } 
+    
     /// inserir texto
     public void uploadTxt(Connection connection) {
         JFileChooser fc = new JFileChooser();
@@ -270,6 +293,28 @@ public class CommandsDB extends GeneralData {
             e.printStackTrace();
         }
     }
+    
+    /// table de texto
+    public ArrayList<GeneralData> listTxt(){
+        Connection conn;
+        PreparedStatement ps;
+        ResultSet rs;
+        ArrayList<GeneralData> lista = new ArrayList<>();
+        String sqlSelect = "SELECT * FROM text_files";
+        conn = new ConnFactory().getConn();
+        try {
+         ps = conn.prepareStatement(sqlSelect);
+         rs = ps.executeQuery();
+         while(rs.next()){
+             GeneralData gd = new GeneralData();
+             gd.setTextname(rs.getString("textname"));
+             gd.setAutor(rs.getString("textautor"));
+             lista.add(gd);
+         }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return lista;
+    } 
 
     /// inserir imagem
     public void uploadImg(Connection conn, String imagename) {
@@ -284,10 +329,11 @@ public class CommandsDB extends GeneralData {
                 File imageFile = new File(imagePath);
                 FileInputStream inputStream = new FileInputStream(imageFile);
 
-                String insertSQL = "INSERT INTO image_files (imagename, imagefile) VALUES (?, ?)";
+                String insertSQL = "INSERT INTO image_files (imagename, imagefile, imageautor) VALUES (?, ?, ?)";
                 PreparedStatement stmt = conn.prepareStatement(insertSQL);
                 stmt.setString(1, imagename);
                 stmt.setBinaryStream(2, inputStream, (int) imageFile.length());
+                stmt.setString(3, getAutor());
 
                 int rowsAffected = stmt.executeUpdate();
                 if (rowsAffected > 0) {
@@ -347,4 +393,33 @@ public class CommandsDB extends GeneralData {
             e.printStackTrace();
         }
     }
+
+    /// table de imagens
+    public ArrayList<GeneralData> listImg(){
+        Connection conn;
+        PreparedStatement ps;
+        ResultSet rs;
+        ArrayList<GeneralData> lista = new ArrayList<>();
+        String sql = "SELECT * FROM image_files";
+        
+        conn = new ConnFactory().getConn();
+        
+        try {
+         ps = conn.prepareStatement(sql);
+         rs = ps.executeQuery();
+         
+         while(rs.next()){
+             GeneralData gd = new GeneralData();
+             gd.setImagename(rs.getString("imagename"));
+             gd.setAutor(rs.getString("imageautor"));
+             
+             lista.add(gd);
+         }
+         
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }return lista;
+    } 
+    
+    
 }

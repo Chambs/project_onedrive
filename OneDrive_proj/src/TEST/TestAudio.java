@@ -186,7 +186,7 @@ public class TestAudio extends javax.swing.JFrame {
     
     public void DELETE(){
         conn = bd.getConn();
-        System.out.println(">> Excluir audio");
+        System.out.println(">> Delete audio");
         aName = JOptionPane.showInputDialog(null, "Nome do arquivo a ser deletado: ");
         cBD.setAudioname(aName);
         cBD.deleteAudio(conn);
