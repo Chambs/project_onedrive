@@ -171,7 +171,7 @@ public class TestTableImg extends javax.swing.JFrame {
     
     public void IMGLIST(){
         try {
-            System.out.println(">> LISTAR");
+            System.out.println(">> Listar");
             CommandsDB cDB = new CommandsDB();
             DefaultTableModel model = (DefaultTableModel) tableImg.getModel();
             model.setNumRows(0);

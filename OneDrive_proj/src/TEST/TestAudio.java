@@ -164,14 +164,16 @@ public class TestAudio extends javax.swing.JFrame {
     CommandsDB cBD = new CommandsDB();
     Connection conn = null;
     ConnFactory bd = new ConnFactory();
-    String aName;
+    String aName, autor;
     
     public void UPLOAD() throws IOException{
         conn = bd.getConn();
         System.out.println(">> Upload audio)");
+        autor = JOptionPane.showInputDialog(null, "Nome do autor: ");
+        cBD.setAutor(autor);
         aName = JOptionPane.showInputDialog(null, "Salvar arquivo como: ");
         cBD.setAudioname(aName);
-        cBD.uploadAudio(conn, aName);
+        cBD.uploadAudio(conn);
         JOptionPane.showMessageDialog(null, "Arquivo de audio inserido com sucesso");
     }
     
@@ -181,7 +183,7 @@ public class TestAudio extends javax.swing.JFrame {
         System.out.println(">> Play audio");
         aName = JOptionPane.showInputDialog(null, "Nome: ");
         cBD.setAudioname(aName);
-        cBD.playAudio(conn, aName);
+        cBD.playAudio(conn);
     }
     
     public void DELETE(){
@@ -191,8 +193,5 @@ public class TestAudio extends javax.swing.JFrame {
         cBD.setAudioname(aName);
         cBD.deleteAudio(conn);
         JOptionPane.showMessageDialog(null, "Arquivo deletado com sucesso!");
-        
     }
-
-
 }

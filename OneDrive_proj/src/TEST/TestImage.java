@@ -2,15 +2,12 @@ package TEST;
 import DAO.*;
 import DTO.*;
 import java.sql.Connection;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class TestImage {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
         String iName, iAutor;
         int loop = 0;
-
         CommandsDB cBD = new CommandsDB();
         Connection conn = null;
         ConnFactory bd = new ConnFactory();
@@ -29,7 +26,7 @@ public class TestImage {
                 cBD.setAutor(iAutor);
                 iName = JOptionPane.showInputDialog(null, "Salvar como: ");
                 cBD.setImagename(iName);
-                cBD.uploadImg(conn, iName);
+                cBD.uploadImg(conn);
                 JOptionPane.showMessageDialog(null, "Imagem inserida com sucesso!");
 
             }else if(op.equals("2")){
@@ -37,7 +34,7 @@ public class TestImage {
                 conn = bd.getConn();
                 iName = JOptionPane.showInputDialog(null, "Nome: ");
                 cBD.setImagename(iName);
-                cBD.loadImg(conn, iName);
+                cBD.loadImg(conn);
 
             }else if(op.equals("3")){
                 System.out.println(">> Excluir imagem");
@@ -46,7 +43,7 @@ public class TestImage {
                 cBD.setImagename(iName);
                 cBD.deleteImg(conn);
                 JOptionPane.showMessageDialog(null, "Imagem excluida com sucesso!");
-                
+
             }else{
                 JOptionPane.showMessageDialog(null, "Saindo...");
                 System.out.println(">> Programa encerrado");

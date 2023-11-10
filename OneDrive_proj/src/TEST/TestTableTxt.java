@@ -173,7 +173,7 @@ public class TestTableTxt extends javax.swing.JFrame {
     
     public void TXTLIST(){
         try {
-            System.out.println(">> LISTAR");
+            System.out.println(">> Listar");
             CommandsDB cDB = new CommandsDB();
             DefaultTableModel model = (DefaultTableModel) tableTxt.getModel();
             model.setNumRows(0);

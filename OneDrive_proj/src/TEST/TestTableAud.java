@@ -173,7 +173,7 @@ public class TestTableAud extends javax.swing.JFrame {
     
     public void AUDLIST(){
         try {
-            System.out.println(">> LISTAR");
+            System.out.println(">> Listar");
             CommandsDB cDB = new CommandsDB();
             DefaultTableModel model = (DefaultTableModel) tableAud.getModel();
             model.setNumRows(0);

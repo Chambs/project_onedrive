@@ -158,11 +158,13 @@ public class TestText extends javax.swing.JFrame {
     CommandsDB cBD = new CommandsDB();
     Connection conn = null;
     ConnFactory bd = new ConnFactory();
-    String tName;
+    String tName, autor;
     
     public void UPLOADTXT(){
         System.out.println(">> Upload texto");
         conn = bd.getConn();
+        autor = JOptionPane.showInputDialog(null, "Nome do autor"); /// DEVE SER AJUSTADO DEPOIS PARA SER O USERNAME
+        cBD.setAutor(autor);
         tName = JOptionPane.showInputDialog(null, "Salvar como: ");
         cBD.setTextname(tName);
         cBD.uploadTxt(conn);
